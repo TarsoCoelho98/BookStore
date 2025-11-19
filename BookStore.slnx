@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="BookStore.Domain/BookStore.Domain.csproj" />
+  <Project Path="BookStore.Infrastructure/BookStore.Infrastructure.csproj" Id="c68f015f-bf90-4ac3-a41d-11455a8d387d" />
+</Solution>
