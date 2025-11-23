@@ -4,10 +4,10 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BookStore.Infrastructure.Repositories
 {
-    internal class BookRepository : IBookRepository
+    public class BookRepository : IBookRepository
     {
-        private readonly AppContext _db;
-        public BookRepository(AppContext db) => _db = db;
+        private readonly BookStoreDbContext _db;
+        public BookRepository(BookStoreDbContext db) => _db = db;
 
         public async Task<Book> GetByIdAsync(Guid id) =>
             await _db.Books.Include(b => b.Author).FirstOrDefaultAsync(b => b.Id == id);

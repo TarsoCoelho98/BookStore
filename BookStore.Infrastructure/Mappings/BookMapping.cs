@@ -12,7 +12,7 @@ namespace BookStore.Infrastructure.Mappings
 
             builder.HasKey(b => b.Id);
 
-            builder.Property(b => b.Name)
+            builder.Property(b => b.Title)
                 .HasColumnType("varchar(200)")
                 .IsRequired();
 

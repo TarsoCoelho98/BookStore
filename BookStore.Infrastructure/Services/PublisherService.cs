@@ -4,7 +4,7 @@ using BookStore.Domain.Interfaces.Services;
 
 namespace BookStore.Infrastructure.Services
 {
-    internal class PublisherService : IPublisherService
+    public class PublisherService : IPublisherService
     {
         private readonly IPublisherRepository _publisherRepository;
         public PublisherService(IPublisherRepository publisherRepository) => _publisherRepository = publisherRepository;
