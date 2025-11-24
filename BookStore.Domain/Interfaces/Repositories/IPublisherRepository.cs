@@ -6,7 +6,7 @@ namespace BookStore.Domain.Interfaces.Repositories
     {
         Task<Publisher> GetByIdAsync(Guid id);
         Task AddAsync(Publisher author);
-        void Update(Publisher author);
-        void Remove(Publisher author);
+        Task UpdateAsync(Publisher author);
+        Task RemoveAsync(Publisher author);
     }
 }

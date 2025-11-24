@@ -1,4 +1,6 @@
-﻿namespace BookStore.Domain.Entities
+﻿using System.Text.Json.Serialization;
+
+namespace BookStore.Domain.Entities
 {
     public class Book
     {

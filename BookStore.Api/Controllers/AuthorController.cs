@@ -47,7 +47,7 @@ namespace BookStore.Api.Controllers
             existing.Country = updated.Country;
             existing.Birthdate = updated.Birthdate;
 
-            _authorService.Update(existing);
+            await _authorService.UpdateAsync(existing);
 
             return NoContent();
         }
@@ -60,7 +60,7 @@ namespace BookStore.Api.Controllers
             if (existing == null)
                 return NotFound();
 
-            _authorService.Remove(existing);
+            await _authorService.RemoveAsync(existing);
 
             return NoContent();
         }

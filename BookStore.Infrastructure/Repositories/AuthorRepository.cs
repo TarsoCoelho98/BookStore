@@ -1,6 +1,7 @@
 ﻿using BookStore.Domain.Entities;
 using BookStore.Domain.Interfaces.Repositories;
 using Microsoft.EntityFrameworkCore;
+using System;
 
 namespace BookStore.Infrastructure.Repositories
 {
@@ -15,16 +16,19 @@ namespace BookStore.Infrastructure.Repositories
         public async Task AddAsync(Author author)
         {
             await _db.Authors.AddAsync(author);
+            await _db.SaveChangesAsync();
         }
 
-        public void Remove(Author author)
+        public async Task RemoveAsync(Author author)
         {
             _db.Authors.Remove(author);
+            await _db.SaveChangesAsync();
         }
 
-        public void Update(Author author)
+        public async Task UpdateAsync(Author author)
         {
             _db.Authors.Update(author);
+            await _db.SaveChangesAsync();
         }
     }
 }

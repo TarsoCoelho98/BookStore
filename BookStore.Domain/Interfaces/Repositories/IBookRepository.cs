@@ -7,7 +7,7 @@ namespace BookStore.Domain.Interfaces.Repositories
         Task<Book> GetByIdAsync(Guid id);
         Task<IEnumerable<Book>> GetByAuthorIdAsync(Guid authorId);
         Task AddAsync(Book book);
-        void Update(Book book);
-        void Remove(Book book);
+        Task UpdateAsync(Book book);
+        Task RemoveAsync(Book book);
     }
 }

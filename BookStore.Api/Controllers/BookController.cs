@@ -11,11 +11,15 @@ namespace BookStore.Api.Controllers
     {
         private readonly ILogger<BookController> _logger;
         private readonly IBookService _bookService;
+        private readonly IAuthorService _authorService;
+        private readonly IPublisherService _publisherService;
 
-        public BookController(ILogger<BookController> logger, IBookService bookService)
+        public BookController(ILogger<BookController> logger, IBookService bookService, IPublisherService publisherService, IAuthorService authorService)
         {
             _logger = logger;
             _bookService = bookService;
+            _publisherService = publisherService;
+            _authorService = authorService;
         }
 
         [HttpGet("author/{authorId:guid}")]
@@ -43,6 +47,20 @@ namespace BookStore.Api.Controllers
         [HttpPost]
         public async Task<ActionResult<Book>> Add(Book book)
         {
+            var author = await _authorService.GetByIdAsync(book.AuthorId);
+
+            if (author is null)
+                return NotFound("Nenhum autor encontrado com esse Id.");
+            else
+                book.Author = author;
+
+            var publisher = await _publisherService.GetByIdAsync(book.PublisherId);
+
+            if (publisher is null)
+                return NotFound("Nenhuma editora encontrada com esse Id.");
+            else
+                book.Publisher = publisher;
+
             await _bookService.AddAsync(book);
 
             return CreatedAtAction(nameof(GetById), new { id = book.Id }, book);
@@ -59,8 +77,8 @@ namespace BookStore.Api.Controllers
             existing.Title = updated.Title;
             existing.Genre = updated.Genre;
             existing.PublicationDate = updated.PublicationDate;
-            
-            _bookService.Update(existing);
+
+            _bookService.UpdateAsync(existing);
 
             return NoContent();
         }
@@ -72,7 +90,7 @@ namespace BookStore.Api.Controllers
             if (existing == null)
                 return NotFound();
 
-            _bookService.Remove(existing);
+            _bookService.RemoveAsync(existing);
 
             return NoContent();
         }

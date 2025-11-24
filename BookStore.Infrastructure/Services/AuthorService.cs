@@ -17,14 +17,14 @@ namespace BookStore.Infrastructure.Services
             await _authorRepository.AddAsync(author);
         }
 
-        public void Remove(Author author)
+        public async Task RemoveAsync(Author author)
         {
-            _authorRepository.Remove(author);
+            await _authorRepository.RemoveAsync(author);
         }
 
-        public void Update(Author author)
+        public async Task UpdateAsync(Author author)
         {
-            _authorRepository.Update(author);
+            await _authorRepository.UpdateAsync(author);
         }
     }
 }

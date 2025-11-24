@@ -12,37 +12,36 @@ namespace BookStore.Infrastructure.Mappings
 
             builder.HasKey(b => b.Id);
 
+            builder.Property(b => b.Id)
+                .HasColumnName("Id")
+                .ValueGeneratedNever();
+
             builder.Property(b => b.Title)
-                .HasColumnType("varchar(200)")
-                .IsRequired();
+                .IsRequired()
+                .HasMaxLength(250);
 
             builder.Property(b => b.PublicationDate)
-                .HasColumnType("datetime(6)")
-                .IsRequired();
+                .IsRequired()
+                .HasColumnType("date");
 
             builder.Property(b => b.Genre)
-                .HasColumnType("varchar(100)");
-
-            builder.Property(b => b.AuthorId)
-                .HasColumnType("binary(16)")
-                .IsRequired();
+                .HasMaxLength(100);
 
             builder.HasOne(b => b.Author)
-                   .WithMany()
-                   .HasForeignKey(b => b.AuthorId)
-                   .OnDelete(DeleteBehavior.Cascade);
-
-            builder.Property(b => b.PublisherId)
-                .HasColumnType("binary(16)")
-                .IsRequired();
+                .WithMany()
+                .HasForeignKey(b => b.AuthorId)
+                .OnDelete(DeleteBehavior.Restrict);
 
             builder.HasOne(b => b.Publisher)
-                   .WithMany()
-                   .HasForeignKey(b => b.PublisherId)
-                   .OnDelete(DeleteBehavior.Cascade);
+                .WithMany()
+                .HasForeignKey(b => b.PublisherId)
+                .OnDelete(DeleteBehavior.Restrict);
 
-            builder.HasIndex(b => b.AuthorId).HasDatabaseName("IX_Book_AuthorId");
-            builder.HasIndex(b => b.PublisherId).HasDatabaseName("IX_Book_PublisherId");
+            builder.HasIndex(b => b.Title)
+                .HasDatabaseName("IX_Book_Title");
+
+            builder.HasIndex(b => b.Genre)
+                .HasDatabaseName("IX_Book_Genre");
         }
     }
 }

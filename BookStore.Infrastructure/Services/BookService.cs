@@ -21,14 +21,14 @@ namespace BookStore.Infrastructure.Services
             await _bookRepository.AddAsync(book);
         }
 
-        public void Remove(Book book)
+        public async Task RemoveAsync(Book book)
         {
-            _bookRepository.Remove(book);
+            await _bookRepository.RemoveAsync(book);
         }
 
-        public void Update(Book book)
+        public async Task UpdateAsync(Book book)
         {
-            _bookRepository.Update(book);
+            await _bookRepository.UpdateAsync(book);
         }
     }
 }

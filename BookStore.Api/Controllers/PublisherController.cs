@@ -48,7 +48,7 @@ namespace BookStore.Api.Controllers
             existing.Country = updated.Country;
             existing.Adress = updated.Adress;
 
-            _publisherService.Update(existing);
+            _publisherService.UpdateAsync(existing);
 
             return NoContent();
         }
@@ -61,7 +61,7 @@ namespace BookStore.Api.Controllers
             if (existing == null)
                 return NotFound();
 
-            _publisherService.Remove(existing);
+            _publisherService.RemoveAsync(existing);
 
             return NoContent();
         }

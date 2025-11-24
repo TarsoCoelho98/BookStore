@@ -17,17 +17,26 @@ namespace BookStore.Infrastructure.Repositories
 
         public async Task AddAsync(Book book)
         {
+            if (book.Author != null && book.Author.Id != Guid.Empty)
+                _db.Attach(book.Author); 
+
+            if (book.Publisher != null && book.Publisher.Id != Guid.Empty)
+                _db.Attach(book.Publisher);
+
             await _db.Books.AddAsync(book);
+            await _db.SaveChangesAsync();
         }
 
-        public void Update(Book book)
+        public async Task UpdateAsync(Book book)
         {
             _db.Books.Update(book);
+            await _db.SaveChangesAsync();
         }
 
-        public void Remove(Book book)
+        public async Task RemoveAsync(Book book)
         {
             _db.Books.Remove(book);
+            await _db.SaveChangesAsync();
         }
     }
 }
